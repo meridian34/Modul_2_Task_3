@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Modul_2_Task_1
+namespace Modul_2_Task_3
 {
     public class Program
     {
@@ -8,6 +8,7 @@ namespace Modul_2_Task_1
         {
             var starter = new Starter();
             starter.Run();
+            Console.WriteLine("End");
             Console.ReadKey();
         }
     }

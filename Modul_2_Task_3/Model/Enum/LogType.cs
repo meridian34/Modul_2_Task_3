@@ -1,4 +1,4 @@
-﻿namespace Modul_2_Task_1
+﻿namespace Modul_2_Task_3.Model.Enum
 {
     public enum LogType
     {
