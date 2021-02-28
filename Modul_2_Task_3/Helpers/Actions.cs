@@ -1,4 +1,8 @@
-﻿namespace Modul_2_Task_1
+﻿using System;
+using Modul_2_Task_3.Model;
+using Modul_2_Task_3.Services;
+
+namespace Modul_2_Task_3.Helpers
 {
     public class Actions
     {
@@ -12,13 +16,12 @@
 
         public Result Update()
         {
-            _logger.LogWarning($"Skipped logic in method: {nameof(Update)}");
-            return new Result() { Status = true };
+            throw new Exception($"Skipped logic in method: {nameof(Update)}");
         }
 
         public Result Remove()
         {
-            return new Result() { Status = false, ErrorMessage = "I broke a logic" };
+            throw new BusinessException($"I broke a logic: {nameof(Remove)}");
         }
     }
 }

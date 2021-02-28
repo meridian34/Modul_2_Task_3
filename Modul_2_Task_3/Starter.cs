@@ -1,7 +1,9 @@
 ﻿using System;
-using System.IO;
+using Modul_2_Task_3.Helpers;
+using Modul_2_Task_3.Model;
+using Modul_2_Task_3.Services;
 
-namespace Modul_2_Task_1
+namespace Modul_2_Task_3
 {
     public class Starter
     {
@@ -17,26 +19,30 @@ namespace Modul_2_Task_1
             for (var i = 0; i < 100; i++)
             {
                 var rnd = _random.Next(_minRandomValue, _maxRandomValue);
-                switch (rnd)
+                try
                 {
-                    case 1:
-                        _result = _actions.Create();
-                        break;
-                    case 2:
-                        _result = _actions.Update();
-                        break;
-                    case 3:
-                        _result = _actions.Remove();
-                        break;
+                    switch (rnd)
+                    {
+                        case 1:
+                            _result = _actions.Create();
+                            break;
+                        case 2:
+                            _result = _actions.Update();
+                            break;
+                        case 3:
+                            _result = _actions.Remove();
+                            break;
+                    }
                 }
-
-                if (!_result.Status)
+                catch (BusinessException e)
                 {
-                    _logger.LogError($"Action failed by a reason: {_result.ErrorMessage}");
+                    _logger.LogWarning($"Action failed by a reason: {e}");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"Action failed by a reason: {e}");
                 }
             }
-
-            File.WriteAllText("log.txt", _logger.GetLogs());
         }
     }
 }

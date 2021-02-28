@@ -1,0 +1,11 @@
+﻿{
+  "LogConfigData": 
+  {
+    "DirectoryPath": "/Logs",
+    "FileNameTemplate": "Log_",
+    "FileExtension": ".txt",
+    "TimeTemplate": "hh.mm.ss",
+    "DateTemplate": "dd.MM.yyyy",
+    "CountStoredFiles": 3
+  }
+}

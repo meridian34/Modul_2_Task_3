@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Text;
+using Modul_2_Task_3.Model;
+using Modul_2_Task_3.Model.Enum;
+using Modul_2_Task_3.Services.Abstract;
 
-namespace Modul_2_Task_1
+namespace Modul_2_Task_3.Services
 {
-    public class Logger
+    public class Logger : ILoggerService
     {
-        private readonly StringBuilder _logText;
+        private readonly IFileService _fileService;
+        private readonly LogConfigData _logConfig;
         private static readonly Logger _instance = new Logger();
 
         private Logger()
         {
-            _logText = new StringBuilder();
+            var configService = new ConfigService();
+            _fileService = new FileService();
+            _logConfig = configService.GetConfig().LogConfigData;
         }
 
         public static Logger Instance
@@ -21,8 +26,7 @@ namespace Modul_2_Task_1
         public void Log(LogType logType, string message)
         {
             var logMessage = $"{DateTime.UtcNow}: {logType}: {message}";
-            Console.WriteLine(logMessage);
-            _logText.AppendLine(logMessage);
+            _fileService.Write(logMessage, _logConfig);
         }
 
         public void LogInfo(string message)
@@ -38,11 +42,6 @@ namespace Modul_2_Task_1
         public void LogError(string message)
         {
             Log(LogType.Error, message);
-        }
-
-        public string GetLogs()
-        {
-            return _logText.ToString();
         }
     }
 }
